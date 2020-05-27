@@ -1,0 +1,28 @@
+body {
+    background-color: #ECECF7;
+    margin: 0;
+    padding: 0;
+}
+img {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+}
+h1 {
+    font-size: 150%;
+    margin: .5em 0;
+    padding: 0;
+}
+li {
+    margin: .5em;
+}
+li a {    margin-left: 1em;
+    color: black !important;
+}
+li img {
+    width: 80vw;
+}
+
+div {
+    padding: .5em 2em;
+}
