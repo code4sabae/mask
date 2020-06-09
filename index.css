@@ -1,12 +1,18 @@
 body {
-    background-color: #ECECF7;
+    background-color: hsl(240, 41%, 90%);
     margin: 0;
     padding: 0;
+}
+.main {
+    margin: 0 auto;
+    padding: 0;
+    background-color: #ECECF7;
+    max-width: 71vh;
 }
 img {
     margin: 0;
     padding: 0;
-    width: 100vw;
+    width: 100%;
 }
 h1 {
     font-size: 150%;
@@ -20,7 +26,7 @@ li a {    margin-left: 1em;
     color: black !important;
 }
 li img {
-    width: 80vw;
+    width: 90%;
 }
 
 div {
