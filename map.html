@@ -1,58 +1,64 @@
 <!DOCTYPE html>
-<link rel='stylesheet' href='https://code4sabae.github.io/leaflet-mjs/leaflet.css' />
-<link rel="stylesheet" href="index.css">
-<script type='module'>
 
-  import { L, gsi } from "./gsi.mjs";
+<head>
+  <meta charset='utf-8' />
 
-  window.onload = async function () {
-    /*const data = [
-      { lat: 35.943560, lng: 136.188917, name: '鯖江駅' },
-      { lat: 35.944539, lng: 136.186222, name: 'Hana道場' },
-      { lat: 35.942795, lng: 136.198881, name: 'めがね会館' },
-      { lat: 35.949658, lng: 136.258142, name: 'JAPAN CRAFT HOUSE' },
-    ];*/
 
-    const data = await (await fetch("sabaemask.json")).json();
-    console.log(data);
+  <link rel='stylesheet' href='https://code4sabae.github.io/leaflet-mjs/leaflet.css' />
+  <link rel="stylesheet" href="index.css">
+  <script type='module'>
 
-    const map = L.map('map');
-    gsi.getTileLayer().addTo(map);
+    import { L, gsi } from "./gsi.mjs";
 
-    const iconlayer = L.layerGroup()
-    iconlayer.addTo(map)
-    const lls = []
-    for (const item of data) {
-      if (item["緯度・経度"] === "") continue;
-      const ll = item["緯度・経度"].split(",");
+    window.onload = async function () {
+      /*const data = [
+        { lat: 35.943560, lng: 136.188917, name: '鯖江駅' },
+        { lat: 35.944539, lng: 136.186222, name: 'Hana道場' },
+        { lat: 35.942795, lng: 136.198881, name: 'めがね会館' },
+        { lat: 35.949658, lng: 136.258142, name: 'JAPAN CRAFT HOUSE' },
+      ];*/
 
-      const marker = L.marker(ll, { title: item.名前 });
-      marker.bindPopup(`店舗名<br>${item.名前}<br>`);
-      iconlayer.addLayer(marker);
-      lls.push(ll);
+      const data = await (await fetch("sabaemask.json")).json();
+      console.log(data);
+
+      const map = L.map('map');
+      gsi.getTileLayer().addTo(map);
+
+      const iconlayer = L.layerGroup()
+      iconlayer.addTo(map)
+      const lls = []
+      for (const item of data) {
+        if (item["緯度・経度"] === "") continue;
+        const ll = item["緯度・経度"].split(",");
+
+        const marker = L.marker(ll, { title: item.名前 });
+        marker.bindPopup(`店舗名<br>${item.名前}<br>`);
+        iconlayer.addLayer(marker);
+        lls.push(ll);
+      }
+      if (lls.length) map.fitBounds(lls);
     }
-    if (lls.length) map.fitBounds(lls);
-  }
 
-</script>
-<style>
-  body {
-    text-align: center;
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+  </script>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-  h1 {
-    margin-left: .5em;
-    font-size: 40px;
-  }
+    h1 {
+      margin-left: .5em;
+      font-size: 40px;
+    }
 
-  #map {
-    width: 100vw;
-    height: 80vh;
-  }
-</style>
+    #map {
+      width: 100vw;
+      height: 80vh;
+    }
+  </style>
+</head>
 
 <body>
   <h1>さばえマスクポストマップ</h1>
