@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<link rel='stylesheet' href='https://code4sabae.github.io/leaflet-mjs/leaflet.css'/>
+<script type='module'>
+
+import { L, gsi } from "./gsi.mjs";
+
+window.onload = async function() {
+  const data = [
+    { lat: 35.943560, lng: 136.188917, name: '鯖江駅' },
+    { lat: 35.944539, lng: 136.186222, name: 'Hana道場' },
+    { lat: 35.942795, lng: 136.198881, name: 'めがね会館' },
+    { lat: 35.949658, lng: 136.258142, name: 'JAPAN CRAFT HOUSE' },
+  ];
+
+  const map = L.map('map');
+  gsi.getTileLayer().addTo(map);
+
+  const iconlayer = L.layerGroup()
+  iconlayer.addTo(map)
+  const lls = []
+  for (const item of data) {
+    const ll = [ item.lat, item.lng ];
+    const marker = L.marker(ll, { title: item.name });
+    marker.bindPopup(`店舗名<br>${item.name}<br>`);
+    iconlayer.addLayer(marker);
+    lls.push(ll);
+  }
+  if (lls.length) map.fitBounds(lls);
+}
+
+</script>
+<style>
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  margin-left: .5em;
+}
+#map {
+  width: 100vw;
+  height: 80vh;
+}
+</style>
+<body>
+<h1>さばえマスクポストマップ</h1>
+<div id="map"></div>
+
+</body>
+</html>
